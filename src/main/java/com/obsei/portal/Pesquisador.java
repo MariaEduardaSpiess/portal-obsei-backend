@@ -23,7 +23,7 @@ public class Pesquisador {
 	private String nome;
 	
 	public static final String LATTES="lattes";
-	@Column(name = "latter", nullable = false)
+	@Column(name = "lattes", nullable = false)
 	private String lattes;
 	
 	public Pesquisador() {}
