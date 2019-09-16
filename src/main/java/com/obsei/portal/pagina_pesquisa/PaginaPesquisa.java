@@ -1,4 +1,4 @@
-package com.obsei.portal;
+package com.obsei.portal.pagina_pesquisa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,18 +20,24 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Component
-@Table(name = "pesquisador")
-public class Pesquisador {
-
+@Table(name = "pagina_pesquisa")
+public class PaginaPesquisa {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	public static final String NOME="nome";
-	@Column(name = "nome", nullable = false)
-	private String nome;
+	public static final String HEADLINE="headline";
+	@Column(name = "headline", nullable = false)
+	private String headline;
 	
-	public static final String LATTES="lattes";
-	@Column(name = "lattes", nullable = false)
-	private String lattes;
+	public static final String DESCRICAO="descricao";
+	@Column(name = "descricao", nullable = false)
+	private String descricao;
+	
+	public static final String LOGO="logo";
+	@Column(name = "logo", nullable = false)
+	private String logo;
+
+
 }
