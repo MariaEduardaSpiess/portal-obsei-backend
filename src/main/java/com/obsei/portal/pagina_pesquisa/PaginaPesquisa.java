@@ -1,11 +1,6 @@
 package com.obsei.portal.pagina_pesquisa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
@@ -36,6 +31,7 @@ public class PaginaPesquisa {
 	private String descricao;
 	
 	public static final String LOGO="logo";
+	@Lob
 	@Column(name = "logo", nullable = false)
 	private String logo;
 
