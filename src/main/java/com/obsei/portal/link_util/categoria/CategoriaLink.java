@@ -17,6 +17,7 @@ import javax.persistence.*;
 @Entity
 @Component
 @Table(name = "categoria_link")
+@JsonSerialize(using=CategoriaLinkSerializable.class)
 public class CategoriaLink {
 	
 	@Id

@@ -25,8 +25,11 @@ public class LinkUtil {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "nome", nullable = false)
-	private String nome;
+	@Column(name = "titulo", nullable = false)
+	private String titulo;
+
+	@Column(name = "link", nullable = false)
+	private String link;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "categoria_link_id", nullable = false)
