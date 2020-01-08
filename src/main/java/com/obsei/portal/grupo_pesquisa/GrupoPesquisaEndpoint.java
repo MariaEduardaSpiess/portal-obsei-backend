@@ -32,24 +32,12 @@ public class GrupoPesquisaEndpoint {
 	@GetMapping(path = "/grupos-pesquisa")
 	public ResponseEntity<List<GrupoPesquisa>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
-//		List<GrupoPesquisa> grupos = StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList());
-//		grupos.forEach(grupo -> {
-//
-//		});
-//		return ResponseEntity.ok(grupos);
 	}
 	
-	@PostMapping(path = "/grupo-pesquisa/{areaPesquisaId}")
-	public GrupoPesquisa criarGrupoPesquisa(@PathVariable (value = "areaPesquisaId") Long areaPesquisaId,
-											@Valid @RequestBody GrupoPesquisa grupoPesquisa) {
-		return areaPesquisaRepository.findById(areaPesquisaId).map(area -> {
-			grupoPesquisa.setAreaPesquisa(area);
-			return repository.save(grupoPesquisa);
-		}).orElseThrow(() -> new ResourceNotFoundException("PostId " + areaPesquisaId + " not found"));
+	@PostMapping(path = "/grupo-pesquisa")
+	public ResponseEntity<GrupoPesquisa> cadastrar(@Valid @RequestBody GrupoPesquisa grupoPesquisa) {
+		return ResponseEntity.ok(repository.save(grupoPesquisa));
 	}
-//	public ResponseEntity<GrupoPesquisa> cadastrar(@Valid @RequestBody GrupoPesquisa grupoPesquisa) {
-//		return ResponseEntity.ok(repository.save(grupoPesquisa));
-//	}
 	
 	@PutMapping(path = "/grupo-pesquisa")
 	public ResponseEntity<GrupoPesquisa> atualizar(@Valid @RequestBody GrupoPesquisa grupoPesquisa) {
