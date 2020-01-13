@@ -1,11 +1,6 @@
 package com.obsei.portal.pesquisador;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
@@ -30,8 +25,17 @@ public class Pesquisador {
 	public static final String NOME="nome";
 	@Column(name = "nome", nullable = false)
 	private String nome;
-	
+
+	public static final String FUNCAO="funcao";
+	@Column(name = "funcao", nullable = false)
+	private String funcao;
+
 	public static final String LATTES="lattes";
 	@Column(name = "lattes", nullable = false)
 	private String lattes;
+
+	public static final String FOTO="foto";
+	@Lob
+	@Column(name = "foto", nullable = true)
+	private String foto;
 }
