@@ -1,6 +1,7 @@
 package com.obsei.portal.pesquisador;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -8,12 +9,9 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PesquisadorEndpoint {
@@ -37,8 +35,23 @@ public class PesquisadorEndpoint {
 		return ResponseEntity.ok(repository.save(pesquisador));
 	}
 	
-	@PutMapping(path = "/pesquisador")
-	public ResponseEntity<Pesquisador> atualizar(@Valid @RequestBody Pesquisador pesquisador) {
-		return ResponseEntity.ok(repository.save(pesquisador));
+	@PutMapping(path = "/pesquisador/{id}")
+	public ResponseEntity<Pesquisador> atualizar(@PathVariable Long id, @Valid @RequestBody Pesquisador pesquisador) {
+		return repository.findById(id)
+				.map(record -> {
+					record.setNome(pesquisador.getNome());
+					record.setFuncao(pesquisador.getFuncao());
+					record.setLattes(pesquisador.getLattes());
+					record.setFoto(pesquisador.getFoto());
+					record.setDescricaoFoto(pesquisador.getDescricaoFoto());
+					Pesquisador updated = repository.save(record);
+					return ResponseEntity.ok().body(updated);
+				}).orElse(ResponseEntity.notFound().build());
+	}
+
+	@DeleteMapping(path = "/pesquisador/{id}")
+	public ResponseEntity excluir(@PathVariable Long id) {
+		repository.deleteById(id);
+		return ResponseEntity.ok(HttpStatus.OK);
 	}
 }

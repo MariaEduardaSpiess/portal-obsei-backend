@@ -1,5 +1,6 @@
 package com.obsei.portal.areas_pesquisa;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,19 @@ public class AreaPesquisaEndpoint {
 		return ResponseEntity.ok(repository.save(areaPesquisa));
 	}
 
-	@PutMapping(path = "/area-pesquisa")
-	public ResponseEntity<AreaPesquisa> atualizar(@Valid @RequestBody AreaPesquisa areaPesquisa) {
-		return ResponseEntity.ok(repository.save(areaPesquisa));
+	@PutMapping(path = "/area-pesquisa/{id}")
+	public ResponseEntity<AreaPesquisa> atualizar(@PathVariable Long id, @Valid @RequestBody AreaPesquisa areaPesquisa) {
+		return repository.findById(id)
+				.map(record -> {
+					record.setNome(areaPesquisa.getNome());
+					AreaPesquisa updated = repository.save(record);
+					return ResponseEntity.ok().body(updated);
+				}).orElse(ResponseEntity.notFound().build());
+	}
+
+	@DeleteMapping(path = "/area-pesquisa/{id}")
+	public ResponseEntity excluir(@PathVariable Long id) {
+		repository.deleteById(id);
+		return ResponseEntity.ok(HttpStatus.OK);
 	}
 }

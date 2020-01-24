@@ -2,6 +2,7 @@ package com.obsei.portal.pesquisador;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +37,11 @@ public class Pesquisador {
 
 	public static final String FOTO="foto";
 	@Lob
+	@JsonIgnore
 	@Column(name = "foto", nullable = true)
 	private String foto;
+
+	public static final String DESC_FOTO="desc_foto";
+	@Column(name = "desc_foto", nullable = false)
+	private String descricaoFoto;
 }
