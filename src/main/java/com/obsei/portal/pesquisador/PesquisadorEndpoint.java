@@ -7,10 +7,15 @@ import java.util.stream.StreamSupport;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
+import com.obsei.portal.pesquisador.foto.FotoPesquisador;
+import com.obsei.portal.pesquisador.foto.FotoPesquisadorRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +25,7 @@ public class PesquisadorEndpoint {
 	private EntityManager em;
 	
 	private PesquisadorRepository repository;
+	private FotoPesquisadorRepository fotoPesquisadorRepository;
 
 	public PesquisadorEndpoint(PesquisadorRepository repository) {
 		this.repository = repository;
@@ -29,6 +35,15 @@ public class PesquisadorEndpoint {
 	public ResponseEntity<List<Pesquisador>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
+
+//	@GetMapping(path = "/foto-pesquisador/{id}")
+//	public ResponseEntity<byte[]> getFotoPesquisador(@PathVariable Long id) {
+//		Pesquisador pesquisador = repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
+//		return ResponseEntity
+//				.ok()
+//				.contentType(MediaType.IMAGE_JPEG)
+//				.body(pesquisador.getFoto().getBytes());
+//	}
 	
 	@PostMapping(path = "/pesquisador")
 	public ResponseEntity<Pesquisador> cadastrar(@Valid @RequestBody Pesquisador pesquisador) {
@@ -42,8 +57,8 @@ public class PesquisadorEndpoint {
 					record.setNome(pesquisador.getNome());
 					record.setFuncao(pesquisador.getFuncao());
 					record.setLattes(pesquisador.getLattes());
-					record.setFoto(pesquisador.getFoto());
-					record.setDescricaoFoto(pesquisador.getDescricaoFoto());
+//					record.setFoto(pesquisador.getFoto());
+//					record.setDescricaoFoto(pesquisador.getDescricaoFoto());
 					Pesquisador updated = repository.save(record);
 					return ResponseEntity.ok().body(updated);
 				}).orElse(ResponseEntity.notFound().build());

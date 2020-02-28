@@ -3,6 +3,9 @@ package com.obsei.portal.pesquisador;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.obsei.portal.pesquisador.foto.FotoPesquisador;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -34,14 +37,4 @@ public class Pesquisador {
 	public static final String LATTES="lattes";
 	@Column(name = "lattes", nullable = false)
 	private String lattes;
-
-	public static final String FOTO="foto";
-	@Lob
-	@JsonIgnore
-	@Column(name = "foto", nullable = true)
-	private String foto;
-
-	public static final String DESC_FOTO="desc_foto";
-	@Column(name = "desc_foto", nullable = false)
-	private String descricaoFoto;
 }
