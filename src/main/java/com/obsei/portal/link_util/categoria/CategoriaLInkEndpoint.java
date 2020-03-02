@@ -22,17 +22,17 @@ public class CategoriaLInkEndpoint {
 		this.repository = repository;
 	}
 
-	@GetMapping(path = "/categorias-links")
+	@GetMapping(path = "/api/private/categorias-links")
 	public ResponseEntity<List<CategoriaLink>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
 
-	@PostMapping(path = "/categoria-links")
+	@PostMapping(path = "/api/private/categoria-links")
 	public ResponseEntity<CategoriaLink> cadastrar(@Valid @RequestBody CategoriaLink categoriaLink) {
 		return ResponseEntity.ok(repository.save(categoriaLink));
 	}
 
-	@PutMapping(path = "/categoria-links")
+	@PutMapping(path = "/api/private/categoria-links")
 	public ResponseEntity<CategoriaLink> atualizar(@Valid @RequestBody CategoriaLink categoriaLink) {
 		return ResponseEntity.ok(repository.save(categoriaLink));
 	}

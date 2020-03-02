@@ -22,17 +22,17 @@ public class ArtigoEndpoint {
 		this.repository = repository;
 	}
 
-	@GetMapping(path = "/artigos")
+	@GetMapping(path = "/api/private/artigos")
 	public ResponseEntity<List<Artigo>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
 
-	@PostMapping(path = "/artigo")
+	@PostMapping(path = "/api/private/artigo")
 	public ResponseEntity<Artigo> cadastrar(@Valid @RequestBody Artigo artigo) {
 		return ResponseEntity.ok(repository.save(artigo));
 	}
 
-	@PutMapping(path = "/artigo")
+	@PutMapping(path = "/api/private/artigo")
 	public ResponseEntity<Artigo> atualizar(@Valid @RequestBody Artigo artigo) {
 		return ResponseEntity.ok(repository.save(artigo));
 	}

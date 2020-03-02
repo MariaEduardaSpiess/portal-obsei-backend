@@ -27,17 +27,17 @@ public class LinkUtilEndpoint {
 		this.repository = repository;
 	}
 	
-	@GetMapping(path = "/links-uteis")
+	@GetMapping(path = "/api/private/links-uteis")
 	public ResponseEntity<List<LinkUtil>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
 	
-	@PostMapping(path = "/link-util")
+	@PostMapping(path = "/api/private/link-util")
 	public ResponseEntity<LinkUtil> cadastrar(@Valid @RequestBody LinkUtil linkUtil) {
 		return ResponseEntity.ok(repository.save(linkUtil));
 	}
 	
-	@PutMapping(path = "/link-util")
+	@PutMapping(path = "/api/private/link-util")
 	public ResponseEntity<LinkUtil> atualizar(@Valid @RequestBody LinkUtil linkUtil) {
 		return ResponseEntity.ok(repository.save(linkUtil));
 	}

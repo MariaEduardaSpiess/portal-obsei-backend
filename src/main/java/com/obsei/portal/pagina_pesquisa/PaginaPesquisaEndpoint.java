@@ -28,17 +28,17 @@ public class PaginaPesquisaEndpoint {
 		this.repository = repository;
 	}
 	
-	@GetMapping(path = "/pagina-pesquisa")
+	@GetMapping(path = "/api/private/pagina-pesquisa")
 	public ResponseEntity<List<PaginaPesquisa>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
 	
-	@PostMapping(path = "/pagina-pesquisa")
+	@PostMapping(path = "/api/private/pagina-pesquisa")
 	public ResponseEntity<PaginaPesquisa> cadastrar(@Valid @RequestBody PaginaPesquisa pagina) {
 		return ResponseEntity.ok(repository.save(pagina));
 	}
 	
-	@PutMapping(path = "/pagina-pesquisa")
+	@PutMapping(path = "/api/private/pagina-pesquisa")
 	public ResponseEntity<PaginaPesquisa> atualizar(@Valid @RequestBody PaginaPesquisa pagina) {
 		return ResponseEntity.ok(repository.save(pagina));
 	}

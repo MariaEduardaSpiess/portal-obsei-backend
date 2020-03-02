@@ -24,17 +24,17 @@ public class QuestionarioEndpoint {
 		this.repository = repository;
 	}
 	
-	@GetMapping(path = "/questionarios")
+	@GetMapping(path = "/api/private/questionarios")
 	public ResponseEntity<List<Questionario>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
 
-	@PostMapping(path = "/questionario")
+	@PostMapping(path = "/api/private/questionario")
 	public ResponseEntity<Questionario> cadastrar(@Valid @RequestBody Questionario questionario) {
 		return ResponseEntity.ok(repository.save(questionario));
 	}
 
-	@PutMapping(path = "/questionario")
+	@PutMapping(path = "/api/private/questionario")
 	public ResponseEntity<Questionario> atualizar(@Valid @RequestBody Questionario questionario) {
 		return ResponseEntity.ok(repository.save(questionario));
 	}

@@ -23,17 +23,17 @@ public class AreaPesquisaEndpoint {
 		this.repository = repository;
 	}
 
-	@GetMapping(path = "/areas-pesquisa")
+	@GetMapping(path = "/api/private/areas-pesquisa")
 	public ResponseEntity<List<AreaPesquisa>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
 
-	@PostMapping(path = "/area-pesquisa")
+	@PostMapping(path = "/api/private/area-pesquisa")
 	public ResponseEntity<AreaPesquisa> cadastrar(@Valid @RequestBody AreaPesquisa areaPesquisa) {
 		return ResponseEntity.ok(repository.save(areaPesquisa));
 	}
 
-	@PutMapping(path = "/area-pesquisa/{id}")
+	@PutMapping(path = "/api/private/area-pesquisa/{id}")
 	public ResponseEntity<AreaPesquisa> atualizar(@PathVariable Long id, @Valid @RequestBody AreaPesquisa areaPesquisa) {
 		return repository.findById(id)
 				.map(record -> {
@@ -43,7 +43,7 @@ public class AreaPesquisaEndpoint {
 				}).orElse(ResponseEntity.notFound().build());
 	}
 
-	@DeleteMapping(path = "/area-pesquisa/{id}")
+	@DeleteMapping(path = "/api/private/area-pesquisa/{id}")
 	public ResponseEntity excluir(@PathVariable Long id) {
 		repository.deleteById(id);
 		return ResponseEntity.ok(HttpStatus.OK);

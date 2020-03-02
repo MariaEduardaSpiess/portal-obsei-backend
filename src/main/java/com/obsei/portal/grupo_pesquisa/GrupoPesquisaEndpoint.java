@@ -29,17 +29,17 @@ public class GrupoPesquisaEndpoint {
 		this.repository = repository;
 	}
 	
-	@GetMapping(path = "/grupos-pesquisa")
+	@GetMapping(path = "/api/private/grupos-pesquisa")
 	public ResponseEntity<List<GrupoPesquisa>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
 	
-	@PostMapping(path = "/grupo-pesquisa")
+	@PostMapping(path = "/api/private/grupo-pesquisa")
 	public ResponseEntity<GrupoPesquisa> cadastrar(@Valid @RequestBody GrupoPesquisa grupoPesquisa) {
 		return ResponseEntity.ok(repository.save(grupoPesquisa));
 	}
 	
-	@PutMapping(path = "/grupo-pesquisa")
+	@PutMapping(path = "/api/private/grupo-pesquisa")
 	public ResponseEntity<GrupoPesquisa> atualizar(@Valid @RequestBody GrupoPesquisa grupoPesquisa) {
 		return ResponseEntity.ok(repository.save(grupoPesquisa));
 	}

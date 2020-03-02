@@ -1,0 +1,16 @@
+@urlBase =http://localhost:8080/api
+
+###
+GET {{urlBase}}/private/areas-pesquisa HTTP/1.1
+authtoken:eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjpfIn0.Py1eSV2GkE70WZCeMg_8_OYNNhTe_Hu-5FZS1dOYyEZ7sUCjdRVay2OBb-DdUZB68OAnE7Ns_zE89Vp6k9hd8w
+Content-Type: application/json;charset=UTF-8
+###
+
+POST {{urlBase}}/public/login  HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+
+{
+    "username" : "admin",
+    "password" : "admin123"
+}
+

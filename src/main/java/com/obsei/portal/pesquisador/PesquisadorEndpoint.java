@@ -31,7 +31,7 @@ public class PesquisadorEndpoint {
 		this.repository = repository;
 	}
 	
-	@GetMapping(path = "/pesquisadores")
+	@GetMapping(path = "/api/private/pesquisadores")
 	public ResponseEntity<List<Pesquisador>> findAll() {
 		return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
 	}
