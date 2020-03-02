@@ -20,20 +20,13 @@ import javax.persistence.*;
 @Table(name = "foto_pesquisador")
 public class FotoPesquisador {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public static final String FOTO="foto";
     @Lob
     @Column(name = "foto", nullable = false)
     private String base64;
 
-    public static final String DESC_FOTO="desc_foto";
     @Column(name = "desc_foto", nullable = false)
     private String descricaoFoto;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pesquisador_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Pesquisador pesquisador;
 }

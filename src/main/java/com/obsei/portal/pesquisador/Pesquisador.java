@@ -23,7 +23,7 @@ import lombok.Setter;
 public class Pesquisador {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	public static final String NOME="nome";
@@ -37,4 +37,8 @@ public class Pesquisador {
 	public static final String LATTES="lattes";
 	@Column(name = "lattes", nullable = false)
 	private String lattes;
+
+	@OneToOne
+	@JoinColumn(name = "foto_id")
+	private FotoPesquisador fotoPesquisador;
 }
