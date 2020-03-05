@@ -39,7 +39,6 @@ public class PesquisadorEndpoint {
         return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(), false).collect(Collectors.toList()));
     }
 
-    @Transactional
     @GetMapping(path = "/api/private/foto-pesquisador/{id}")
     public ResponseEntity<FotoPesquisador> getFotoPesquisador(@PathVariable Long id) {
         Pesquisador pesquisador = repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
@@ -57,11 +56,10 @@ public class PesquisadorEndpoint {
         return ResponseEntity.ok(payload);
     }
 
-    @Transactional
-    @PutMapping(path = "/api/private/pesquisador/{id}")
-    public ResponseEntity<PesquisadorDTO> atualizar(@PathVariable Long id, @Valid @RequestBody PesquisadorDTO payload) {
+    @PutMapping(path = "/api/private/pesquisador/{id}/{idFoto}")
+    public ResponseEntity<PesquisadorDTO> atualizar(@PathVariable Long id, @PathVariable Long idFoto, @Valid @RequestBody PesquisadorDTO payload) {
         FotoPesquisador fotoPesquisador = payload.getFotoPesquisador();
-        payload.setFotoPesquisador(fotoPesquisadorRepository.findById(fotoPesquisador.getId()).map(fotoBanco -> {
+        payload.setFotoPesquisador(fotoPesquisadorRepository.findById(idFoto).map(fotoBanco -> {
 			fotoBanco.setBase64(fotoPesquisador.getBase64());
 			fotoBanco.setDescricaoFoto(fotoPesquisador.getDescricaoFoto());
 			return fotoPesquisadorRepository.save(fotoBanco);
